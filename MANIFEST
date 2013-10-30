@@ -4,6 +4,8 @@ LICENSE
 META.json
 README.md
 cpanfile
+eg/demo.psgi
+js/xsrf-token.js
 lib/HTTP/Session2.pm
 lib/HTTP/Session2/Base.pm
 lib/HTTP/Session2/ClientStore.pm
