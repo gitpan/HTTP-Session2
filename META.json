@@ -64,7 +64,7 @@
    "provides" : {
       "HTTP::Session2" : {
          "file" : "lib/HTTP/Session2.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       },
       "HTTP::Session2::Base" : {
          "file" : "lib/HTTP/Session2/Base.pm"
@@ -77,7 +77,7 @@
       },
       "HTTP::Session2::ServerStore" : {
          "file" : "lib/HTTP/Session2/ServerStore.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       }
    },
    "release_status" : "stable",
@@ -91,5 +91,5 @@
          "web" : "https://github.com/tokuhirom/HTTP-Session2"
       }
    },
-   "version" : "0.02"
+   "version" : "0.03"
 }
