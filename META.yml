@@ -3,19 +3,19 @@ abstract: 'HTTP session management'
 author:
   - 'tokuhirom <tokuhirom@gmail.com>'
 build_requires:
-  Plack::Response: 0
-  Test::More: 0.98
-  Test::WWW::Mechanize::PSGI: 0
+  Plack::Response: '0'
+  Test::More: '0.98'
+  Test::WWW::Mechanize::PSGI: '0'
 configure_requires:
-  CPAN::Meta: 0
-  CPAN::Meta::Prereqs: 0
-  Module::Build: 0.38
+  CPAN::Meta: '0'
+  CPAN::Meta::Prereqs: '0'
+  Module::Build: '0.38'
 dynamic_config: 0
-generated_by: 'Minilla/v0.7.5, CPAN::Meta::Converter version 2.132510'
+generated_by: 'Minilla/v0.12.0, CPAN::Meta::Converter version 2.133380'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: HTTP-Session2
 no_index:
   directory:
@@ -30,7 +30,7 @@ no_index:
 provides:
   HTTP::Session2:
     file: lib/HTTP/Session2.pm
-    version: 0.04
+    version: '0.05'
   HTTP::Session2::Base:
     file: lib/HTTP/Session2/Base.pm
   HTTP::Session2::ClientStore:
@@ -39,18 +39,20 @@ provides:
     file: lib/HTTP/Session2/Expired.pm
   HTTP::Session2::ServerStore:
     file: lib/HTTP/Session2/ServerStore.pm
-    version: 0.04
+    version: '0.05'
 requires:
-  Cookie::Baker: 0
-  Digest::HMAC: 0
-  Digest::SHA: 0
-  Digest::SHA1: 0
-  MIME::Base64: 0
-  Mouse: 0
-  parent: 0
-  perl: 5.008005
+  Cookie::Baker: '0'
+  Digest::HMAC: '0'
+  Digest::SHA: '0'
+  Digest::SHA1: '0'
+  MIME::Base64: '0'
+  Mouse: '0'
+  parent: '0'
+  perl: '5.008005'
 resources:
   bugtracker: https://github.com/tokuhirom/HTTP-Session2/issues
   homepage: https://github.com/tokuhirom/HTTP-Session2
   repository: git://github.com/tokuhirom/HTTP-Session2.git
-version: 0.04
+version: '0.05'
+x_contributors:
+  - 'magai <xxmagai@gmail.com>'
