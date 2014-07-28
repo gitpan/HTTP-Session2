@@ -4,7 +4,7 @@ use warnings;
 use utf8;
 use 5.008_001;
 
-our $VERSION = "0.05";
+our $VERSION = "1.00";
 
 use Carp ();
 use Digest::HMAC;
@@ -111,7 +111,7 @@ sub expire {
 
 sub _build_xsrf_token {
     my $self = shift;
-    Digest::HMAC::hmac_hex($self->id, $self->secret, $self->hmac_function);
+    Digest::HMAC::hmac_hex($self->secret, $self->id, $self->hmac_function);
 }
 
 sub save_data {
