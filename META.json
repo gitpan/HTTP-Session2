@@ -63,7 +63,7 @@
    "provides" : {
       "HTTP::Session2" : {
          "file" : "lib/HTTP/Session2.pm",
-         "version" : "1.01"
+         "version" : "1.02"
       },
       "HTTP::Session2::Base" : {
          "file" : "lib/HTTP/Session2/Base.pm"
@@ -74,9 +74,12 @@
       "HTTP::Session2::Expired" : {
          "file" : "lib/HTTP/Session2/Expired.pm"
       },
+      "HTTP::Session2::Random" : {
+         "file" : "lib/HTTP/Session2/Random.pm"
+      },
       "HTTP::Session2::ServerStore" : {
          "file" : "lib/HTTP/Session2/ServerStore.pm",
-         "version" : "1.01"
+         "version" : "1.02"
       }
    },
    "release_status" : "stable",
@@ -90,7 +93,7 @@
          "web" : "https://github.com/tokuhirom/HTTP-Session2"
       }
    },
-   "version" : "1.01",
+   "version" : "1.02",
    "x_contributors" : [
       "magai <xxmagai@gmail.com>"
    ]
