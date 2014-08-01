@@ -1,41 +1,46 @@
-package HTTP::Session2::ClientStore;
+package HTTP::Session2::ClientStore2;
 use strict;
 use warnings;
 use utf8;
 use 5.008_001;
 
+use Cookie::Baker ();
 use Storable ();
-use Carp ();
-use Cookie::Baker;
-use MIME::Base64;
-use HTTP::Session2::Random;
-use Digest::HMAC;
+use MIME::Base64 ();
+use Digest::HMAC ();
 use HTTP::Session2::Expired;
+use HTTP::Session2::Random;
+use Data::MessagePack;
+use Crypt::CBC;
 
 use Mouse;
 
 extends 'HTTP::Session2::Base';
 
-# Backward compatibility.
+our $MESSAGE_PACK = Data::MessagePack->new();
 
-has 'serializer' => (
+has serializer => (
     is => 'ro',
     default => sub {
         sub {
-            warn("Do not use HTTP::Session2::ClientStore. Use HTTP::Session2::ServerStore or HTTP::Session2::ClientStore2 instead.");
-            MIME::Base64::encode(Storable::nfreeze($_[0]), '' )
+            $MESSAGE_PACK->pack($_[0]);
         }
     },
 );
 
-has 'deserializer' => (
+has deserializer => (
     is => 'ro',
     default => sub {
         sub {
-            warn("Do not use HTTP::Session2::ClientStore. Use HTTP::Session2::ServerStore or HTTP::Session2::ClientStore2 instead.");
-            Storable::thaw(MIME::Base64::decode($_[0]))
+            $MESSAGE_PACK->unpack($_[0])
         }
     },
+);
+
+has cipher => (
+    is => 'ro',
+    isa => 'Crypt::CBC',
+    required => 1,
 );
 
 has ignore_old => (
@@ -71,7 +76,13 @@ sub load_session {
     my $cookies = Cookie::Baker::crush_cookie($self->env->{HTTP_COOKIE});
     my $session_cookie = $cookies->{$self->session_cookie->{name}};
     if (defined $session_cookie) {
-        my ($time, $id, $serialized, $sig) = split /:/, $session_cookie, 4;
+        my ($time, $id, $encrypted, $sig) = split /:/, $session_cookie, 4;
+        $encrypted = MIME::Base64::decode_base64url($encrypted);
+        my $serialized = eval { $self->cipher->decrypt($encrypted) };
+        if ($@) {
+            warn $@;
+            return;
+        }
         _compare($self->sig($serialized), $sig) or do {
             return;
         };
@@ -160,7 +171,9 @@ sub _serialize {
     my ($self, $id, $data) = @_;
 
     my $serialized = $self->serializer->($data);
-    join ":", time(), $id, $serialized, $self->sig($serialized);
+    my $encrypted = $self->cipher->encrypt($serialized);
+    $encrypted = MIME::Base64::encode_base64url($encrypted);
+    join ":", time(), $id, $encrypted, $self->sig($serialized);
 }
 
 1;
@@ -168,9 +181,38 @@ __END__
 
 =head1 NAME
 
-HTTP::Session2::ClientStore - (Deprecated)Client store
+HTTP::Session2::ClientStore2 - Client store
 
 =head1 DESCRIPTION
 
-Use L<HTTP::Session2::ClientStore2> instead.
+This is a part of L<HTTP::Session2> library.
+
+This module stores the data to the cookie value.
+Client can read the data from cookie_jar.
+Do not store the important data to this module.
+
+Normally, you should use L<HTTP::Session2::ServerStore>.
+
+=head1 ClientStore specific constructor parameters
+
+=over 4
+
+=item C<< serializer: CodeRef >>
+
+Serializer callback function.
+
+Default: C<< MIME::Base64::encode(Storable::nfreeze($_[0]), '' ) >>
+
+=item C<< deserializer: CodeRef >>
+
+Deserializer callback function.
+
+Default: C<< Storable::thaw(MIME::Base64::decode($_[0])) >>
+
+=item C<< ignore_old: Int >>
+
+Ignore session data older than C<ignore_old> value.
+You can specify this value in epoch time.
+
+=back
 
