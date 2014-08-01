@@ -29,7 +29,7 @@ no_index:
 provides:
   HTTP::Session2:
     file: lib/HTTP/Session2.pm
-    version: '1.06'
+    version: '1.07'
   HTTP::Session2::Base:
     file: lib/HTTP/Session2/Base.pm
   HTTP::Session2::ClientStore:
@@ -42,7 +42,7 @@ provides:
     file: lib/HTTP/Session2/Random.pm
   HTTP::Session2::ServerStore:
     file: lib/HTTP/Session2/ServerStore.pm
-    version: '1.06'
+    version: '1.07'
 requires:
   Cookie::Baker: '0'
   Crypt::CBC: '0'
@@ -50,7 +50,7 @@ requires:
   Digest::HMAC: '0'
   Digest::SHA: '0'
   Digest::SHA1: '0'
-  MIME::Base64: '0'
+  MIME::Base64: '3.11'
   Mouse: '0'
   Time::HiRes: '0'
   parent: '0'
@@ -59,6 +59,6 @@ resources:
   bugtracker: https://github.com/tokuhirom/HTTP-Session2/issues
   homepage: https://github.com/tokuhirom/HTTP-Session2
   repository: git://github.com/tokuhirom/HTTP-Session2.git
-version: '1.06'
+version: '1.07'
 x_contributors:
   - 'magai <xxmagai@gmail.com>'
