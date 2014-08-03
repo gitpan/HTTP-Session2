@@ -58,6 +58,7 @@
       "test" : {
          "requires" : {
             "Crypt::Rijndael" : "0",
+            "Plack::Request" : "0",
             "Plack::Response" : "0",
             "Test::More" : "0.98",
             "Test::WWW::Mechanize::PSGI" : "0"
@@ -67,7 +68,7 @@
    "provides" : {
       "HTTP::Session2" : {
          "file" : "lib/HTTP/Session2.pm",
-         "version" : "1.07"
+         "version" : "1.08"
       },
       "HTTP::Session2::Base" : {
          "file" : "lib/HTTP/Session2/Base.pm"
@@ -86,7 +87,7 @@
       },
       "HTTP::Session2::ServerStore" : {
          "file" : "lib/HTTP/Session2/ServerStore.pm",
-         "version" : "1.07"
+         "version" : "1.08"
       }
    },
    "release_status" : "stable",
@@ -100,7 +101,7 @@
          "web" : "https://github.com/tokuhirom/HTTP-Session2"
       }
    },
-   "version" : "1.07",
+   "version" : "1.08",
    "x_contributors" : [
       "magai <xxmagai@gmail.com>"
    ]
